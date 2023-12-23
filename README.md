@@ -6,10 +6,11 @@ To run this application on your device:
 - cd into the folder containing these codes.
 - at the root of the folder, run **npm install**.
 - create a **.env** file at the root of the repository.
-        put your - MONGO_URI
-                 - JWT_SECRET
-                 - JWT_EXPIRES_IN
-                 - PORT
+- put your 
+1. MONGO_URI
+2. JWT_SECRET
+3. JWT_EXPIRES_IN
+4. PORT
 
 -Run **npm start**
 
