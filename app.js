@@ -11,8 +11,9 @@ dotenv.config({path: 'config.env'})
 
 app.use('/api/v1/auth', authrouter);
 
+
 app.get('/', (req, res) => {
-    res.send('hello');
+    res.send('hell from the server side');
 })
 
 

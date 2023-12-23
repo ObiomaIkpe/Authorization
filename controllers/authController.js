@@ -9,7 +9,7 @@ const signUp = async(req, res) => {
         email: req.body.email,
         password: req.body.password
     })
-    v
+    
 
     const token = newUser.createJWT()
 
