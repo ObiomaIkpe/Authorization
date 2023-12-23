@@ -9,8 +9,9 @@ const signUp = async(req, res) => {
         email: req.body.email,
         password: req.body.password
     })
+    v
 
-    const token = jwt.sign(newUser._id, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN})
+    const token = newUser.createJWT()
 
     res.status(StatusCodes.OK).json({
         token,
@@ -28,9 +29,10 @@ const login = async (req, res) => {
     const user = await User.findOne({email})
     console.log(user);
 
-    if (!user || !(await user.comparePassword(password, user.password))) throw new AppError('invalid detals', StatusCodes.BAD_REQUEST)
+    if (!user || !(await user.comparePasswords(password, user.password))) throw new AppError('invalid detals', StatusCodes.BAD_REQUEST)
 
-    const token = jwt.sign(user._id, process.env.JWT_SECRET, {expiresIn : process.env.JWT_EXPIRES_IN})
+    const token = user.createJWT();
+
 
     res.status(StatusCodes.OK).json({
         token,
@@ -38,4 +40,8 @@ const login = async (req, res) => {
             user
         }
     })
+}
+
+module.exports = {
+    signUp, login
 }
