@@ -6,7 +6,7 @@ To run this application on your device:
 - cd into the folder containing these codes.
 - at the root of the folder, run **npm install**.
 - create a **.env** file at the root of the repository.
-- Put your: 
+- Provide the following values: 
     1. MONGO_URI
     2. JWT_SECRET
     3. JWT_EXPIRES_IN
