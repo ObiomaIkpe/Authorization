@@ -1,6 +1,7 @@
 const User = require('../models/usermodel');
 const {StatusCodes} = require('http-status-codes');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const AppError = require('../errorHandler/customErrorObject');
 
 const signUp = async(req, res) => {
     const newUser = await User.create({
@@ -26,4 +27,15 @@ const login = async (req, res) => {
 
     const user = await User.findOne({email})
     console.log(user);
+
+    if (!user || !(await user.comparePassword(password, user.password))) throw new AppError('invalid detals', StatusCodes.BAD_REQUEST)
+
+    const token = jwt.sign(user._id, process.env.JWT_SECRET, {expiresIn : process.env.JWT_EXPIRES_IN})
+
+    res.status(StatusCodes.OK).json({
+        token,
+        data :{
+            user
+        }
+    })
 }
