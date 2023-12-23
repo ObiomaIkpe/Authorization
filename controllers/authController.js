@@ -17,6 +17,13 @@ const signUp = async(req, res) => {
             newUser
         }
     })
+}
 
+const login = async (req, res) => {
+    const {email, password} = req.body;
 
+    if(!email || !password) throw new AppError('Invalid email or password', StatusCodes.BAD_REQUEST)
+
+    const user = await User.findOne({email})
+    console.log(user);
 }
